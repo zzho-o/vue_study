@@ -1,22 +1,32 @@
 <template>
+  <!-- modal -->
   <div class="black-bg" @click="modalOn = false" v-if="modalOn === true">
     <div class="white-bg">
-      <h4>상세페이지</h4>
-      <p>내용</p>
+      <img :src="productModal.imgSrc" class="room-img" />
+      <h4>{{ productModal.name }}</h4>
+      <p>{{ productModal.price }}</p>
       <button @click="modalOn = false">닫기</button>
     </div>
   </div>
-
+  <!-- modal -->
   <div class="menu">
     <a v-for="(menu, i) in menus" :key="i">{{ menu }}</a>
   </div>
   <div v-for="(product, i) in products" :key="i">
     <img :src="product.imgSrc" class="room-img" />
-    <h4 @click="modalOn = true">{{ product.name }}</h4>
+    <h4
+      @click="
+        modalOn = true;
+        clickProduct(product);
+      "
+    >
+      {{ product.name }}
+    </h4>
     <p>{{ product.price }}</p>
     <button @click="increase(product)">허위매물신고</button>
-    <span>신고수 : {{ product.reportNum }}</span>
+    <span style="margin-left: 20px">신고 수 : {{ product.reportNum }}</span>
   </div>
+  <div style="margin-bottom: 100px"></div>
 </template>
 
 <script>
@@ -26,6 +36,7 @@ export default {
   components: {},
   data() {
     return {
+      productModal: {},
       modalOn: false,
       products: products,
       menus: ["Home", "Shop", "About"],
@@ -34,6 +45,10 @@ export default {
   methods: {
     increase(obj) {
       obj.reportNum += 1;
+    },
+    clickProduct(obj) {
+      this.productModal = obj;
+      this.modalOn = true;
     },
   },
 };
