@@ -1,25 +1,17 @@
 <template>
-  <!-- modal -->
-  <div class="black-bg" @click="modalOn = false" v-if="modalOn === true">
-    <div class="white-bg">
-      <img :src="productModal.imgSrc" class="room-img" />
-      <h4>{{ productModal.name }}</h4>
-      <p>{{ productModal.price }}</p>
-      <button @click="modalOn = false">닫기</button>
-    </div>
-  </div>
-  <!-- modal -->
+  <Modal
+    :productModal="productModal"
+    :modalOn="modalOn"
+    :closeModal="closeModal"
+  />
+
   <div class="menu">
     <a v-for="(menu, i) in menus" :key="i">{{ menu }}</a>
   </div>
-  <div v-for="(product, i) in products" :key="i">
+
+  <div style="margin-bottom: 20px" v-for="(product, i) in products" :key="i">
     <img :src="product.imgSrc" class="room-img" />
-    <h4
-      @click="
-        modalOn = true;
-        clickProduct(product);
-      "
-    >
+    <h4 @click="clickProduct(product)">
       {{ product.name }}
     </h4>
     <p>{{ product.price }}</p>
@@ -31,9 +23,10 @@
 
 <script>
 import { products } from "./assets/dummy";
+import Modal from "./components/Modal";
 export default {
   name: "App",
-  components: {},
+  components: { Modal: Modal },
   data() {
     return {
       productModal: {},
@@ -49,6 +42,9 @@ export default {
     clickProduct(obj) {
       this.productModal = obj;
       this.modalOn = true;
+    },
+    closeModal() {
+      this.modalOn = false;
     },
   },
 };
@@ -68,23 +64,7 @@ body {
 div {
   box-sizing: border-box;
 }
-.black-bg {
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5);
-  position: fixed;
-  padding: 20px;
-}
-.white-bg {
-  width: 100%;
-  background: white;
-  border-radius: 8px;
-  padding: 20px;
-}
-.room-img {
-  width: 100%;
-  margin-top: 40px;
-}
+
 .menu {
   background: darkslateblue;
   padding: 15px;
