@@ -1,9 +1,9 @@
 <template>
   <div class="black-bg" v-if="modalOn === true">
     <div class="white-bg">
-      <!-- <img :src="productModal.imgSrc" class="room-img" /> -->
-      <!-- <h4>{{ productModal.name }}</h4>
-      <p>{{ productModal.price }}</p> -->
+      <img :src="productModal.imgSrc" class="room-img" />
+      <h4>{{ productModal.name }}</h4>
+      <p>{{ productModal.price }}</p>
       <Discount />
       <button @click="closeModal">닫기</button>
     </div>

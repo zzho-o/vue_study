@@ -8,8 +8,12 @@
   <div class="menu">
     <a v-for="(menu, i) in menus" :key="i">{{ menu }}</a>
   </div>
-
-  <div style="margin-bottom: 20px" v-for="(product, i) in products" :key="i">
+  <Card
+    :products="products"
+    :clickProduct="clickProduct"
+    :increase="increase"
+  />
+  <!-- <div style="margin-bottom: 20px" v-for="(product, i) in products" :key="i">
     <img :src="product.imgSrc" class="room-img" />
     <h4 @click="clickProduct(product)">
       {{ product.name }}
@@ -17,16 +21,18 @@
     <p>{{ product.price }}</p>
     <button @click="increase(product)">허위매물신고</button>
     <span style="margin-left: 20px">신고 수 : {{ product.reportNum }}</span>
-  </div>
+  </div> -->
+
   <div style="margin-bottom: 100px"></div>
 </template>
 
 <script>
 import { products } from "./assets/dummy";
 import Modal from "./components/Modal";
+import Card from "./components/Card";
 export default {
   name: "App",
-  components: { Modal: Modal },
+  components: { Modal: Modal, Card: Card },
   data() {
     return {
       productModal: {},
