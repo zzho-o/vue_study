@@ -1,5 +1,6 @@
 const products = [
   {
+    id: 0,
     name: "a원룸",
     price: "50만원",
     reportNum: 0,
@@ -8,12 +9,14 @@ const products = [
     // todo: alias로 경로 수정
   },
   {
+    id: 1,
     name: "b원룸",
     price: "60만원",
     reportNum: 0,
     imgSrc: require("./house2.jpg"),
   },
   {
+    id: 2,
     name: "c원룸",
     price: "70만원",
     reportNum: 0,

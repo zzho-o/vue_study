@@ -9,12 +9,19 @@
     <a v-for="(menu, i) in menus" :key="i">{{ menu }}</a>
   </div>
 
-  <div style="margin-bottom: 20px" v-for="(product, i) in products" :key="i">
+  <div style="margin-bottom: 20px">
     <Card
       :product="product"
-      :clickProduct="clickProduct"
       :increase="increase"
+      @modalOn="
+        modalOn = true;
+        productModal = $event;
+      "
+      v-for="(product, i) in products"
+      :key="i"
     />
+    <!-- :clickProduct="clickProduct" -->
+    <!-- 이 함수로도 조작 가능 -->
   </div>
 
   <div style="margin-bottom: 100px"></div>

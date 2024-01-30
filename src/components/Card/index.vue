@@ -1,7 +1,7 @@
 <template>
   <div>
     <img :src="product.imgSrc" class="room-img" />
-    <h4 @click="clickProduct(product)">
+    <h4 @click="$emit('modalOn', product)">
       {{ product.name }}
     </h4>
     <p>{{ product.price }}</p>
@@ -14,7 +14,8 @@
 export default {
   name: "Card",
   components: {},
-  props: { product: Object, clickProduct: Function, increase: Function },
+  props: { product: Object, increase: Function },
+  // clickProduct: Function
 };
 </script>
 
