@@ -8,20 +8,14 @@
   <div class="menu">
     <a v-for="(menu, i) in menus" :key="i">{{ menu }}</a>
   </div>
-  <Card
-    :products="products"
-    :clickProduct="clickProduct"
-    :increase="increase"
-  />
-  <!-- <div style="margin-bottom: 20px" v-for="(product, i) in products" :key="i">
-    <img :src="product.imgSrc" class="room-img" />
-    <h4 @click="clickProduct(product)">
-      {{ product.name }}
-    </h4>
-    <p>{{ product.price }}</p>
-    <button @click="increase(product)">허위매물신고</button>
-    <span style="margin-left: 20px">신고 수 : {{ product.reportNum }}</span>
-  </div> -->
+
+  <div style="margin-bottom: 20px" v-for="(product, i) in products" :key="i">
+    <Card
+      :product="product"
+      :clickProduct="clickProduct"
+      :increase="increase"
+    />
+  </div>
 
   <div style="margin-bottom: 100px"></div>
 </template>

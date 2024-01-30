@@ -1,5 +1,5 @@
 <template>
-  <div style="margin-bottom: 20px" v-for="(product, i) in products" :key="i">
+  <div>
     <img :src="product.imgSrc" class="room-img" />
     <h4 @click="clickProduct(product)">
       {{ product.name }}
@@ -14,7 +14,7 @@
 export default {
   name: "Card",
   components: {},
-  props: { products: Object, clickProduct: Function, increase: Function },
+  props: { product: Object, clickProduct: Function, increase: Function },
 };
 </script>
 
