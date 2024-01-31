@@ -3,22 +3,34 @@
     <div class="white-bg">
       <img :src="productModal.imgSrc" class="room-img" />
       <h4>{{ productModal.name }}</h4>
-      <p>{{ productModal.price }}</p>
-      <Discount />
-      <button @click="closeModal">닫기</button>
+      <p>{{ productModal.price }}만원</p>
+      <!-- <Discount /> -->
+      <div style="display: flex; flex-direction: column">
+        <input v-model="month" />
+        <p>
+          {{ month ? month : "1" }}개월 선택함 :
+          {{ productModal.price * (month ? Number(month) : 1) }}만원
+        </p>
+        <button @click="closeModal">닫기</button>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-import Discount from "../Discount";
+// import Discount from "../Discount";
 export default {
   name: "Modal",
-  components: { Discount: Discount },
+  // components: { Discount: Discount },
   props: {
     productModal: Object,
     modalOn: Boolean,
     closeModal: Function,
+  },
+  data() {
+    return {
+      month: "1",
+    };
   },
 };
 </script>
