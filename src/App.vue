@@ -1,14 +1,17 @@
 <template>
-  <Modal
-    :productModal="productModal"
-    :modalOn="modalOn"
-    :closeModal="closeModal"
-  />
-
+  <transition name="fade">
+    <Modal
+      :productModal="productModal"
+      :modalOn="modalOn"
+      :closeModal="closeModal"
+    />
+  </transition>
   <div class="menu">
     <a v-for="(menu, i) in menus" :key="i">{{ menu }}</a>
   </div>
-
+  <Discount />
+  <button @click="priceSort">가격순정렬</button>
+  <button @click="sortBack">되돌리기</button>
   <div style="margin-bottom: 20px">
     <Card
       :product="product"
@@ -31,11 +34,13 @@
 import { products } from "./assets/dummy";
 import Modal from "./components/Modal";
 import Card from "./components/Card";
+import Discount from "./components/Discount";
 export default {
   name: "App",
-  components: { Modal: Modal, Card: Card },
+  components: { Modal: Modal, Card: Card, Discount: Discount },
   data() {
     return {
+      originalProducts: [...products],
       productModal: {},
       modalOn: false,
       products: products,
@@ -53,17 +58,34 @@ export default {
     closeModal() {
       this.modalOn = false;
     },
+    priceSort() {
+      this.products.sort((a, b) => Number(a.price) - Number(b.price));
+    },
+    sortBack() {
+      this.products = [...this.originalProducts];
+    },
   },
 };
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+.fade-enter-from {
+  opacity: 0;
+}
+.fade-enter-active {
+  transition: all 1s;
+}
+.fade-enter-to {
+  opacity: 1;
+}
+.fade-laeve-from {
+  opcity: 1;
+}
+.fade-leave-active {
+  transition: all 1s;
+}
+.fade-leave-to {
+  opacity: 0;
 }
 body {
   margin: 0;

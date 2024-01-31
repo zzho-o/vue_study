@@ -1,12 +1,21 @@
 <template>
-  <div>
+  <div
+    style="
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+    "
+  >
     <img :src="product.imgSrc" class="room-img" />
     <h4 @click="$emit('modalOn', product)">
       {{ product.name }}
     </h4>
     <p>{{ product.price }}만원</p>
-    <button @click="increase(product)">허위매물신고</button>
-    <span style="margin-left: 20px">신고 수 : {{ product.reportNum }}</span>
+    <div>
+      <button @click="increase(product)">허위매물신고</button>
+      <span style="margin-left: 20px">신고 수 : {{ product.reportNum }}</span>
+    </div>
   </div>
 </template>
 
@@ -18,5 +27,4 @@ export default {
   // clickProduct: Function
 };
 </script>
-
 <style></style>
