@@ -34,7 +34,7 @@ export default {
   },
   watch: {
     month(val) {
-      if (Number(val) > 12) {
+      if (Number(val) > 12 || Number(val) < 0) {
         alert("유효개월 수를 초과하였습니다.");
       }
     },

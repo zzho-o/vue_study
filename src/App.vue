@@ -9,7 +9,13 @@
   <div class="menu">
     <a v-for="(menu, i) in menus" :key="i">{{ menu }}</a>
   </div>
-  <Discount />
+  <transition name="fade">
+    <Discount
+      name="fade"
+      style="position: absolute; position: fixed"
+      v-if="showDiscount === true"
+    />
+  </transition>
   <button @click="priceSort">가격순정렬</button>
   <button @click="sortBack">되돌리기</button>
   <div style="margin-bottom: 20px">
@@ -35,6 +41,7 @@ import { products } from "./assets/dummy";
 import Modal from "./components/Modal";
 import Card from "./components/Card";
 import Discount from "./components/Discount";
+
 export default {
   name: "App",
   components: { Modal: Modal, Card: Card, Discount: Discount },
@@ -45,7 +52,16 @@ export default {
       modalOn: false,
       products: products,
       menus: ["Home", "Shop", "About"],
+      showDiscount: false,
     };
+  },
+  beforeMount() {
+    setTimeout(() => {
+      this.showDiscount = true;
+    }, 200);
+    setTimeout(() => {
+      this.showDiscount = false;
+    }, 2000);
   },
   methods: {
     increase(obj) {
@@ -79,7 +95,7 @@ export default {
   opacity: 1;
 }
 .fade-laeve-from {
-  opcity: 1;
+  opacity: 1;
 }
 .fade-leave-active {
   transition: all 1s;
