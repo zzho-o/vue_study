@@ -32,6 +32,13 @@ export default {
       month: "1",
     };
   },
+  watch: {
+    month(val) {
+      if (Number(val) > 12) {
+        alert("유효개월 수를 초과하였습니다.");
+      }
+    },
+  },
 };
 </script>
 
