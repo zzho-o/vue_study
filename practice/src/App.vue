@@ -1,39 +1,41 @@
 <template>
-  <transition name="fade">
-    <Modal
-      :productModal="productModal"
-      :modalOn="modalOn"
-      :closeModal="closeModal"
-    />
-  </transition>
-  <div class="menu">
-    <a v-for="(menu, i) in menus" :key="i">{{ menu }}</a>
-  </div>
-  <transition name="fade">
-    <Discount
-      name="fade"
-      style="position: absolute; position: fixed"
-      v-if="showDiscount === true"
-    />
-  </transition>
-  <button @click="priceSort">가격순정렬</button>
-  <button @click="sortBack">되돌리기</button>
-  <div style="margin-bottom: 20px">
-    <Card
-      :product="product"
-      :increase="increase"
-      @modalOn="
-        modalOn = true;
-        productModal = $event;
-      "
-      v-for="(product, i) in products"
-      :key="i"
-    />
-    <!-- :clickProduct="clickProduct" -->
-    <!-- 이 함수로도 조작 가능 -->
-  </div>
+  <div>
+    <transition name="fade">
+      <Modal
+        :productModal="productModal"
+        :modalOn="modalOn"
+        :closeModal="closeModal"
+      />
+    </transition>
+    <div class="menu">
+      <a v-for="(menu, i) in menus" :key="i">{{ menu }}</a>
+    </div>
+    <transition name="fade">
+      <Discount
+        name="fade"
+        style="position: absolute; position: fixed"
+        v-if="showDiscount === true"
+      />
+    </transition>
+    <button @click="priceSort">가격순정렬</button>
+    <button @click="sortBack">되돌리기</button>
+    <div style="margin-bottom: 20px">
+      <Card
+        :product="product"
+        :increase="increase"
+        @modalOn="
+          modalOn = true;
+          productModal = $event;
+        "
+        v-for="(product, i) in products"
+        :key="i"
+      />
+      <!-- :clickProduct="clickProduct" -->
+      <!-- 이 함수로도 조작 가능 -->
+    </div>
 
-  <div style="margin-bottom: 100px"></div>
+    <div style="margin-bottom: 100px"></div>
+  </div>
 </template>
 
 <script>
