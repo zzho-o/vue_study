@@ -1,5 +1,6 @@
 <template>
   <div>
+    <router-link to="/">홈</router-link>
     <div v-for="(feed, i) in feeds" :key="i">
       <div>{{ feed.title }}</div>
       <p>{{ feed.content }}</p>
