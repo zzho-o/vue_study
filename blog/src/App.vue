@@ -61,7 +61,7 @@
         </div>
       </div>
     </nav>
-
+    <div class="mt-5"></div>
     <router-view :feeds="blogFeeds"></router-view>
     <!-- <List :feeds="blogFeeds" /> -->
   </div>

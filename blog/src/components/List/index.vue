@@ -1,9 +1,14 @@
 <template>
   <div>
     <router-link to="/">홈</router-link>
+    <div class="mt-5"></div>
     <div v-for="(feed, i) in feeds" :key="i">
-      <div>{{ feed.title }}</div>
-      <p>{{ feed.content }}</p>
+      {{ console.log(i) }}
+      <router-link :to="'/detail/' + i">
+        <div>{{ feed.title }}</div>
+        <p>{{ feed.content }}</p>
+        <div class="mt-5"></div>
+      </router-link>
     </div>
   </div>
 </template>
