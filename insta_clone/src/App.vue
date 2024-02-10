@@ -9,12 +9,12 @@
       </ul>
       <img src="./assets/logo.png" class="logo" />
     </div>
-    <Container :feeds="feeds" />
+    <Container :feeds="feeds" :step="step" />
     <button @click="more">더보기</button>
 
     <div class="footer">
       <ul class="footer-button-plus">
-        <input type="file" id="file" class="inputfile" />
+        <input @change="upload" type="file" id="file" class="inputfile" />
         <label for="file" class="input-plus">+</label>
       </ul>
     </div>
@@ -30,15 +30,23 @@ export default {
   name: "App",
   components: { Container: Container },
   data() {
-    return { feeds: dummy };
+    return { feeds: dummy,
+    moreNum:0,
+    step:0,
+     };
   },
   methods:{
     more(){
-      axios.get(`https://codingapple1.github.io/vue/more${i}.json`)
+      axios.get(`https://codingapple1.github.io/vue/more${this.moreNum}.json`)
       .then((res) => {
         this.feeds.push(res.data)
-        
+        this.moreNum += 1
       })
+    },
+    upload(e){
+      const file = e.target.files
+      console.log(URL.createObjectURL(file[0]))
+      this.step += 1
     }
   }
 };
