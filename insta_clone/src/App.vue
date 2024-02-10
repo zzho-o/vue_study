@@ -10,6 +10,7 @@
       <img src="./assets/logo.png" class="logo" />
     </div>
     <Container :feeds="feeds" />
+    <button @click="more">더보기</button>
 
     <div class="footer">
       <ul class="footer-button-plus">
@@ -23,12 +24,23 @@
 <script>
 import Container from "./components/Container";
 import { dummy } from "./assets/dummy";
+import axios from 'axios'
+
 export default {
   name: "App",
   components: { Container: Container },
   data() {
     return { feeds: dummy };
   },
+  methods:{
+    more(){
+      axios.get(`https://codingapple1.github.io/vue/more${i}.json`)
+      .then((res) => {
+        this.feeds.push(res.data)
+        
+      })
+    }
+  }
 };
 </script>
 
