@@ -5,11 +5,17 @@
         <li>Cancel</li>
       </ul>
       <ul class="header-button-right">
-        <li>Next</li>
+        <li v-if="step === 1" @click="step += 1">Next</li>
+        <li v-if="step === 2" @click="publish">발행</li>
       </ul>
       <img src="./assets/logo.png" class="logo" />
     </div>
-    <Container :feeds="feeds" :step="step" />
+    <Container
+      @write="content = $event"
+      :feeds="feeds"
+      :step="step"
+      :imgUrl="imgUrl"
+    />
     <button @click="more">더보기</button>
 
     <div class="footer">
@@ -24,31 +30,44 @@
 <script>
 import Container from "./components/Container";
 import { dummy } from "./assets/dummy";
-import axios from 'axios'
+import axios from "axios";
 
 export default {
   name: "App",
   components: { Container: Container },
   data() {
-    return { feeds: dummy,
-    moreNum:0,
-    step:0,
-     };
+    return { feeds: dummy, moreNum: 0, step: 0, imgUrl: "", content: "" };
   },
-  methods:{
-    more(){
-      axios.get(`https://codingapple1.github.io/vue/more${this.moreNum}.json`)
-      .then((res) => {
-        this.feeds.push(res.data)
-        this.moreNum += 1
-      })
+  methods: {
+    more() {
+      axios
+        .get(`https://codingapple1.github.io/vue/more${this.moreNum}.json`)
+        .then((res) => {
+          this.feeds.push(res.data);
+          this.moreNum += 1;
+        });
     },
-    upload(e){
-      const file = e.target.files
-      console.log(URL.createObjectURL(file[0]))
-      this.step += 1
-    }
-  }
+    upload(e) {
+      const file = e.target.files;
+      const url = URL.createObjectURL(file[0]);
+      this.imgUrl = url;
+      this.step += 1;
+    },
+    publish() {
+      const myFeed = {
+        name: "tmp name",
+        userImage: "",
+        postImage: this.imgUrl,
+        likes: 0,
+        date: "",
+        liked: false,
+        content: this.content,
+        filter: "",
+      };
+      this.feeds.unshift(myFeed);
+      this.step = 0;
+    },
+  },
 };
 </script>
 
